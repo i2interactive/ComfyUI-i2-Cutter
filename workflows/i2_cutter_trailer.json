@@ -1,0 +1,772 @@
+{
+ "id": "d580d53e-5d5f-46f1-9d70-bcabec472a54",
+ "revision": 0,
+ "last_node_id": 11,
+ "last_link_id": 10,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "i2FootageBin",
+   "pos": [
+    40,
+    60
+   ],
+   "size": [
+    380,
+    300
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "folder",
+     "type": "STRING",
+     "link": null
+    },
+    {
+     "name": "recursive",
+     "type": "BOOLEAN",
+     "link": null
+    },
+    {
+     "name": "extensions",
+     "type": "STRING",
+     "link": null
+    },
+    {
+     "name": "cut_sensitivity",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "min_shot_sec",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "analysis_fps",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "handle_sec",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "exclude_black",
+     "type": "BOOLEAN",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "shots",
+     "type": "I2_SHOTS",
+     "links": [
+      1,
+      2
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "contact_sheet",
+     "type": "IMAGE",
+     "links": [
+      8
+     ],
+     "slot_index": 1
+    },
+    {
+     "name": "summary",
+     "type": "STRING",
+     "links": [],
+     "slot_index": 2
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "i2FootageBin"
+   },
+   "widgets_values": [
+    "C:\\path\\to\\WASTING\\shots",
+    true,
+    "mp4,mov,mxf,mkv,avi,m4v,webm,mts,m2ts,mpg,mpeg",
+    0.5,
+    0.8,
+    4.0,
+    0.12,
+    true
+   ]
+  },
+  {
+   "id": 2,
+   "type": "i2MusicMap",
+   "pos": [
+    40,
+    520
+   ],
+   "size": [
+    380,
+    200
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "audio_path",
+     "type": "STRING",
+     "link": null
+    },
+    {
+     "name": "start_sec",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "length_sec",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "bpm_hint",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "beats_per_bar",
+     "type": "INT",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "music",
+     "type": "I2_MUSIC",
+     "links": [
+      3
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "beat_map",
+     "type": "IMAGE",
+     "links": [
+      7
+     ],
+     "slot_index": 1
+    },
+    {
+     "name": "summary",
+     "type": "STRING",
+     "links": [],
+     "slot_index": 2
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "i2MusicMap"
+   },
+   "widgets_values": [
+    "C:\\path\\to\\trailer_music.wav",
+    0.0,
+    60.0,
+    0.0,
+    4
+   ]
+  },
+  {
+   "id": 3,
+   "type": "i2ShotScorer",
+   "pos": [
+    460,
+    60
+   ],
+   "size": [
+    440,
+    460
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "shots",
+     "type": "I2_SHOTS",
+     "link": 1
+    },
+    {
+     "name": "brief",
+     "type": "STRING",
+     "link": null
+    },
+    {
+     "name": "negative",
+     "type": "STRING",
+     "link": null
+    },
+    {
+     "name": "use_clip",
+     "type": "BOOLEAN",
+     "link": null
+    },
+    {
+     "name": "negative_strength",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "keep_model_loaded",
+     "type": "BOOLEAN",
+     "link": null
+    },
+    {
+     "name": "clip_model_folder",
+     "type": "STRING",
+     "link": null,
+     "shape": 7
+    }
+   ],
+   "outputs": [
+    {
+     "name": "scores",
+     "type": "I2_SCORES",
+     "links": [
+      4
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "report",
+     "type": "STRING",
+     "links": [
+      10
+     ],
+     "slot_index": 1
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "i2ShotScorer"
+   },
+   "widgets_values": [
+    "# One story beat per line, in order. '| 2' makes a beat twice as long.\n# TITLE: lines become black title cards (1 bar, or '| 2' for 2 bars) and markers in the timeline.\na quiet stable at dawn, a horse breathing in the dark\na jockey alone, starving himself, a mirror, a scale | 1.5\nTITLE: THIS NOVEMBER\nthe race, hooves, speed, a roaring crowd | 2\ncollapse, aftermath, an empty track at dusk\nTITLE: WASTING | 2",
+    "text, watermark, logo, black screen, blurry",
+    true,
+    "openai/clip-vit-large-patch14",
+    "auto",
+    0.6,
+    false,
+    ""
+   ]
+  },
+  {
+   "id": 4,
+   "type": "i2CutPlanner",
+   "pos": [
+    940,
+    60
+   ],
+   "size": [
+    360,
+    470
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "shots",
+     "type": "I2_SHOTS",
+     "link": 2
+    },
+    {
+     "name": "music",
+     "type": "I2_MUSIC",
+     "link": 3
+    },
+    {
+     "name": "min_beats_per_cut",
+     "type": "INT",
+     "link": null
+    },
+    {
+     "name": "max_beats_per_cut",
+     "type": "INT",
+     "link": null
+    },
+    {
+     "name": "energy_response",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "story_weight",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "motion_match",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "variety",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "cut_on_accents",
+     "type": "BOOLEAN",
+     "link": null
+    },
+    {
+     "name": "allow_reuse",
+     "type": "BOOLEAN",
+     "link": null
+    },
+    {
+     "name": "min_cut_sec",
+     "type": "FLOAT",
+     "link": null
+    },
+    {
+     "name": "seed",
+     "type": "INT",
+     "link": null
+    },
+    {
+     "name": "scores",
+     "type": "I2_SCORES",
+     "link": 4,
+     "shape": 7
+    }
+   ],
+   "outputs": [
+    {
+     "name": "cut",
+     "type": "I2_CUT",
+     "links": [
+      5
+     ],
+     "slot_index": 0
+    },
+    {
+     "name": "storyboard",
+     "type": "IMAGE",
+     "links": [
+      6
+     ],
+     "slot_index": 1
+    },
+    {
+     "name": "cut_list",
+     "type": "STRING",
+     "links": [
+      9
+     ],
+     "slot_index": 2
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "i2CutPlanner"
+   },
+   "widgets_values": [
+    "trailer",
+    1,
+    8,
+    0.6,
+    1.0,
+    0.5,
+    0.15,
+    true,
+    false,
+    0.4,
+    "auto",
+    0,
+    "fixed"
+   ]
+  },
+  {
+   "id": 5,
+   "type": "i2TimelineExport",
+   "pos": [
+    1340,
+    60
+   ],
+   "size": [
+    420,
+    640
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "cut",
+     "type": "I2_CUT",
+     "link": 5
+    },
+    {
+     "name": "filename_prefix",
+     "type": "STRING",
+     "link": null
+    },
+    {
+     "name": "sequence_name",
+     "type": "STRING",
+     "link": null
+    },
+    {
+     "name": "fcp_xml",
+     "type": "BOOLEAN",
+     "link": null
+    },
+    {
+     "name": "edl",
+     "type": "BOOLEAN",
+     "link": null
+    },
+    {
+     "name": "source_audio",
+     "type": "BOOLEAN",
+     "link": null
+    },
+    {
+     "name": "preview_mp4",
+     "type": "BOOLEAN",
+     "link": null
+    },
+    {
+     "name": "burn_titles",
+     "type": "BOOLEAN",
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "xml_path",
+     "type": "STRING",
+     "links": [],
+     "slot_index": 0
+    },
+    {
+     "name": "folder",
+     "type": "STRING",
+     "links": [],
+     "slot_index": 1
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "i2TimelineExport"
+   },
+   "widgets_values": [
+    "i2_cutter/trailer",
+    "WASTING trailer (i2 Cutter)",
+    true,
+    true,
+    false,
+    true,
+    540,
+    true
+   ]
+  },
+  {
+   "id": 6,
+   "type": "PreviewImage",
+   "pos": [
+    940,
+    740
+   ],
+   "size": [
+    1300,
+    760
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 6
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PreviewImage"
+   },
+   "widgets_values": [],
+   "title": "Storyboard"
+  },
+  {
+   "id": 7,
+   "type": "PreviewImage",
+   "pos": [
+    40,
+    760
+   ],
+   "size": [
+    860,
+    220
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 7
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PreviewImage"
+   },
+   "widgets_values": [],
+   "title": "Beat map"
+  },
+  {
+   "id": 8,
+   "type": "PreviewImage",
+   "pos": [
+    40,
+    1020
+   ],
+   "size": [
+    860,
+    360
+   ],
+   "flags": {},
+   "order": 8,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 8
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PreviewImage"
+   },
+   "widgets_values": [],
+   "title": "Shots found"
+  },
+  {
+   "id": 9,
+   "type": "PreviewAny",
+   "pos": [
+    1800,
+    60
+   ],
+   "size": [
+    440,
+    640
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "source",
+     "type": "*",
+     "link": 9
+    }
+   ],
+   "outputs": [
+    {
+     "name": "STRING",
+     "type": "STRING",
+     "links": [],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PreviewAny"
+   },
+   "widgets_values": [
+    "",
+    false
+   ],
+   "title": "Cut list"
+  },
+  {
+   "id": 10,
+   "type": "PreviewAny",
+   "pos": [
+    460,
+    560
+   ],
+   "size": [
+    440,
+    160
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "source",
+     "type": "*",
+     "link": 10
+    }
+   ],
+   "outputs": [
+    {
+     "name": "STRING",
+     "type": "STRING",
+     "links": [],
+     "slot_index": 0
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "PreviewAny"
+   },
+   "widgets_values": [
+    "",
+    false
+   ],
+   "title": "Best shots per line"
+  },
+  {
+   "id": 11,
+   "type": "Note",
+   "pos": [
+    40,
+    -200
+   ],
+   "size": [
+    2200,
+    220
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "Note"
+   },
+   "widgets_values": [
+    "i2 Cutter: ComfyUI as an assistant editor. It doesn't generate a single pixel.\n\n1. Footage Bin: point it at a folder of clips (or one long master). It splits files into shots and measures motion. Results are cached.\n2. Music Map: your track, where to start and how long the cut is. The beat map shows bars (white), accents (red) and energy (yellow).\n3. Shot Scorer: one story beat per line. CLIP (local) scores every shot against every line. First run downloads the model into ComfyUI/models/i2_cutter.\n4. Cut Planner: lays shots onto the beat grid. Change the seed for another version of the cut.\n5. Timeline Export: writes an FCP 7 XML (Premiere: File > Import; Resolve: File > Import > Timeline), an EDL, a cut list and a preview MP4 into ComfyUI/output/i2_cutter.\n\nRed 'NEEDS SHOTS' markers in the timeline = lines of the brief your footage doesn't cover well. Generate those, drop them in the folder, run again."
+   ]
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   3,
+   0,
+   "I2_SHOTS"
+  ],
+  [
+   2,
+   1,
+   0,
+   4,
+   0,
+   "I2_SHOTS"
+  ],
+  [
+   3,
+   2,
+   0,
+   4,
+   1,
+   "I2_MUSIC"
+  ],
+  [
+   4,
+   3,
+   0,
+   4,
+   12,
+   "I2_SCORES"
+  ],
+  [
+   5,
+   4,
+   0,
+   5,
+   0,
+   "I2_CUT"
+  ],
+  [
+   6,
+   4,
+   1,
+   6,
+   0,
+   "IMAGE"
+  ],
+  [
+   7,
+   2,
+   1,
+   7,
+   0,
+   "IMAGE"
+  ],
+  [
+   8,
+   1,
+   1,
+   8,
+   0,
+   "IMAGE"
+  ],
+  [
+   9,
+   4,
+   2,
+   9,
+   0,
+   "STRING"
+  ],
+  [
+   10,
+   3,
+   1,
+   10,
+   0,
+   "STRING"
+  ]
+ ],
+ "groups": [],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.75,
+   "offset": [
+    100,
+    260
+   ]
+  }
+ },
+ "version": 0.4
+}
