@@ -77,8 +77,26 @@ def frames_to_tc(frames, timebase, drop=False):
 
 
 # ---------------------------------------------------------------- probing
+def resolve_input(path):
+    """A relative path that isn't there as given is looked for in ComfyUI's input
+    folder (where the Creative Hub and the ComfyUI upload button put files)."""
+    p = os.path.expanduser(str(path or "").strip().strip('"').strip("'"))
+    if not p or os.path.isabs(p) or os.path.exists(p):
+        return os.path.abspath(p) if p else p
+    try:
+        import folder_paths  # noqa: WPS433
+        base = folder_paths.get_input_directory()
+    except Exception:
+        return os.path.abspath(p)
+    rel = p.replace("\\", "/")
+    if rel.lower().startswith("input/"):
+        rel = rel[6:]
+    cand = os.path.normpath(os.path.join(base, rel))
+    return cand if os.path.exists(cand) else os.path.abspath(p)
+
+
 def list_media(folder, exts, recursive):
-    folder = os.path.abspath(os.path.expanduser(folder.strip().strip('"')))
+    folder = resolve_input(folder)
     if os.path.isfile(folder):
         return [folder]
     if not os.path.isdir(folder):

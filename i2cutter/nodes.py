@@ -98,7 +98,7 @@ class I2MusicMap:
     CATEGORY = CAT
 
     def run(self, audio_path, start_sec, length_sec, bpm_hint, beats_per_bar):
-        p = os.path.abspath(os.path.expanduser(audio_path.strip().strip('"')))
+        p = media.resolve_input(audio_path)
         if not os.path.isfile(p):
             raise FileNotFoundError(f"i2 Cutter: music not found: {p}")
         m = music.analyze(p, start_sec, length_sec, bpm_hint, beats_per_bar)
