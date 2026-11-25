@@ -1,6 +1,6 @@
 [project]
 name = "comfyui-i2-cutter"
 description = "ComfyUI as an assistant editor: footage + music + a brief in, a Premiere / Resolve timeline cut on the beat out."
-version = "1.0.0"
+version = "1.0.1"
 license = { file = "LICENSE" }
 dependencies = ["transformers>=4.40"]
