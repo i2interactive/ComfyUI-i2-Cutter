@@ -10,6 +10,12 @@ footage folder ─► i2 Footage Bin ─┬─► i2 Shot Scorer (CLIP) ─┐
 music file ────► i2 Music Map ────┴──────────────────────────┘
 ```
 
+## Use it from the i2 Creative Hub
+
+The [i2 Creative Hub](https://github.com/i2interactive/i2-creative-hub) (1.26 and newer) has this pack as the **Cutter** tool in its Workflows channel. Type the footage folder, drop a track (or type its path), write the brief and press Generate. The hub shows the preview, the storyboard and the cut list, with download links for the XML, the EDL and the cut-list JSON. If the pack is missing, the hub offers an Install button.
+
+![The Cutter tool in the i2 Creative Hub](docs/hub-cutter.jpg)
+
 ## What each node does
 
 | Node | Does | Shows you |
@@ -26,6 +32,8 @@ music file ────► i2 Music Map ────┴────────�
 2. Make sure `transformers` is installed. Most ComfyUI installs already have it; if not: `python -m pip install -r requirements.txt` with ComfyUI's Python.
 3. Restart ComfyUI. The nodes are under **i2/cutter**.
 4. Drag `workflows/i2_cutter_trailer.json` onto the canvas.
+
+Paths can be full paths on the ComfyUI PC. A plain file name (or `input/song.wav`) is also looked for in ComfyUI's input folder, so files uploaded through ComfyUI or the hub work (1.0.1).
 
 The first run of the Shot Scorer downloads the CLIP model into `ComfyUI/models/i2_cutter/`: about 1.7 GB for ViT-L/14, or 600 MB for ViT-B/32. After that it works offline. It runs on CUDA, Apple MPS or CPU, and it unloads after scoring so it doesn't hold VRAM.
 
@@ -89,4 +97,10 @@ When more than half the cuts in a chapter only weakly match their line of the br
   - cuts only on beats;
   - takes every source range from inside its shot;
   - never overlaps reused windows.
+- **On a real machine** (2026-11-25, ComfyUI 0.46.3, RTX 3070 Ti, through the i2 Creative Hub): six short films in a folder and a 7-second soundtrack gave a 6-cut trailer at 138.9 BPM, with the TITLE card placed, in about 30 s. The XML, EDL and cut-list JSON were written next to the preview. CLIP matching was off for that run.
 - **Not yet tested:** importing into Premiere and Resolve, and scoring with real CLIP weights. The scorer code path was run with a small stand-in CLIP model.
+
+## Changes
+
+- **1.0.1** (2026-11-25): plain file names for the footage and the music are also looked for in ComfyUI's input folder.
+- **1.0.0**: first release.
